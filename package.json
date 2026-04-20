@@ -1,0 +1,29 @@
+{
+  "name": "@x-ude/adapters",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Integration adapters for the x-ude engine (editors, IDEs, VCS, LLMs).",
+  "license": "Apache-2.0",
+  "repository": "github:x-ude/x-adapters",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "tsup": "^8.0.2",
+    "turbo": "^1.13.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
