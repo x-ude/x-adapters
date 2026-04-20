@@ -1,0 +1,44 @@
+name: ci
+
+on:
+  push:
+    branches: [main, 'claude/**']
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile=false
+      - run: pnpm run typecheck
+      - run: pnpm run lint
+      - run: pnpm run build
+      - run: pnpm run test
+      - name: Blocklist scan (public package, no engine-internal refs)
+        run: |
+          set -eo pipefail
+          ! grep -rEn --include='*.ts' --include='*.tsx' --include='*.md' --include='*.json' \\
+            -e 'src/shared/services/(codeCompiler|compilerEngine|editorEngine|iFrameEngine|eventEngine|dynamicBindingEngine)/internal' \\
+            -e 'bitbucket.org/ad-devev' \\
+            -e 'mar23-lab' \\
+            -e 'CONFIDENTIAL[[:space:]]*INTERNAL' \\
+            -e 'AKIA[0-9A-Z]{16}' \\
+            -e 'ghp_[A-Za-z0-9]{36}' \\
+            packages || { echo 'blocklist hit'; exit 1; }

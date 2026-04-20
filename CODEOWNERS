@@ -1,0 +1,4 @@
+# Ownership rules for x-adapters.
+*        @x-ude/adapters-maintainers
+/packages/stackblitz-editor/  @x-ude/adapters-maintainers
+/.github/workflows/           @x-ude/adapters-maintainers
