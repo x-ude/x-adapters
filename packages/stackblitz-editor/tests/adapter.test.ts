@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { errors } from '@x-ude/sdk';
 import { StackBlitzEditorAdapter } from '../src/index.js';
 
 describe('StackBlitzEditorAdapter', () => {
@@ -8,8 +9,12 @@ describe('StackBlitzEditorAdapter', () => {
     expect(a.manifest.capabilities).toContain('editor.mount');
   });
 
-  it('rejects mount before activate', async () => {
+  it('rejects mount before activate (AdapterError with code adapter.not-active)', async () => {
     const a = new StackBlitzEditorAdapter();
-    await expect(a.mount('#root')).rejects.toThrow(/adapter.not-active/);
+    await expect(a.mount('#root')).rejects.toMatchObject({
+      name: 'AdapterError',
+      code: 'adapter.not-active',
+    });
+    await expect(a.mount('#root')).rejects.toBeInstanceOf(errors.AdapterError);
   });
 });
