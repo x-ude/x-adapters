@@ -33,6 +33,9 @@
     "@x-ude/sdk": "workspace:*"
   },
   "devDependencies": {
-    "@x-ude/sdk": "workspace:*"
+    "@x-ude/sdk": "workspace:*",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.4.0"
   }
 }
