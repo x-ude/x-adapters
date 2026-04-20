@@ -1,0 +1,19 @@
+{
+  "name": "@x-ude/example-smoke",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal Vite page that imports @x-ude/sdk and the StackBlitz adapter end-to-end. Used for local-launch smoke.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 5173"
+  },
+  "dependencies": {
+    "@x-ude/sdk": "workspace:*",
+    "@x-ude/adapter-stackblitz-editor": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
